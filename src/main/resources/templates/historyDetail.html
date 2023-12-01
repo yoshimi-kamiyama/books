@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" th:href="@{/css/common.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/side.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/modal.css}" type="text/css">
+	<script type="text/javascript" th:src="@{/js/historyDetail.js}"></script>
+	<script type="text/javascript" th:src="@{/js/modal.js}"></script>
+	<script type="text/javascript" th:src="@{/js/logout.js}"></script>
+<title>履歴詳細</title>
+</head>
+<body>
+	<div class="replace" th:replace="~{/parts/header_part :: header-fragment}"></div>
+	<div class="outer-container">
+		<div class="side-container">
+			<div class="side-inner-container">
+				<h4 class="page-title">履歴詳細</h4>
+				<hr size="2" class="border">
+				<button class="btn delete" type="button" th:value="${history.id}" onclick="deleteClick(this.value)">削除</button>
+				<button id="modalOp" class="btn update" type="button" onclick="modalOpen()">返却期限変更</button>
+				<button class="btn return" type="button" th:value="${history.id}" onclick="returnBook(this.value)">返却手続</button>
+
+				<hr size="2" class="border">
+			</div>
+		</div>
+		<div class="container">
+		    <table class="modal-table table-striped">
+				<!-- <tr><td>利用者</td><td th:text="|${history.user.lastName} ${history.user.firstName}|"></td></tr> -->
+				<tr>
+					<td>利用者</td>
+					<td>
+						<a class="link" th:href="@{/user/search/id(id=${history.user.userId})}" th:text="|${history.user.lastName} ${history.user.firstName}|"></a>
+					</td>
+				</tr>
+				<!-- <tr><td>貸出書籍</td><td th:text="${history.books.title}"></td></tr> -->
+				<tr>
+					<td>貸出書籍</td>
+					<td>
+						<a class="link" th:href="@{/book/search/id(id=${history.books.bookId})}" th:text="${history.books.title}"></a>
+					</td>
+				</tr>
+				<tr><td>貸出日</td><td th:text="${#dates.format(history.checkoutDate, 'yyyy/MM/dd')}"></td></tr>
+				<tr><td>返却期限</td><td th:text="${#dates.format(history.dueDate, 'yyyy/MM/dd')}"></td></tr>
+				<tr><td>返却日</td><td th:text="${#dates.format(history.returnDate, 'yyyy/MM/dd')}"></td></tr>
+				<tr><td>返却状況</td><td th:text="${history.returned}"></td></tr>
+		    </table>
+		</div>
+		<div id="easyModal" class="modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1>Great job 🎉</h1>
+					<span class="modalClose" onclick="modalClose()">×</span>
+				</div>
+				<div class="modal-body">
+					<form name="updateform" action="#" th:action="@{/history/update}" method="post">
+						<input type="hidden" name="id" th:field="*{history.id}">
+					    <table class="table-striped">
+							<tr><td>利用者</td><td th:text="|${history.user.lastName} ${history.user.firstName}|"></td></tr>
+							<tr><td>貸出書籍</td><td th:text="${history.books.title}"></td></tr>
+							<tr><td>貸出日</td><td th:text="${#dates.format(history.checkoutDate, 'yyyy/MM/dd')}"></td></tr>
+							<tr><td>返却期限</td><td><input class="search-input" name="dueDate" type="date" th:value="${#dates.format(history.dueDate, 'yyyy-MM-dd')}" required></td></tr>
+							<tr><td>返却日</td><td th:text="${#dates.format(history.returnDate, 'yyyy/MM/dd')}"></td></tr>
+							<tr><td>返却状況</td><td id="status" th:text="${history.returned}"></td></tr>
+					    </table>
+					    <button id="execute-update" class="btn" type="button" onclick="	updateData()">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

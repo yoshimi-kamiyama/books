@@ -1,0 +1,21 @@
+<header class="fragment" th:fragment="header-fragment">
+	<div class="logo">
+		<a class="logo-link" href="/"><img class="logo-img" th:src="@{/img/EBMS_logo2.png}" alt="［写真］"></a>
+	</div>
+	<div class="index-links">
+		<div class="link-backimg">
+			<a class="header-link" href="/">履歴一覧</a>
+		</div>
+		<div class="link-backimg">
+			<a class="header-link" href="/book/index">書籍一覧</a>
+		</div>
+		<div class="link-backimg">
+			<a class="header-link" href="/user/index">ユーザ一覧</a>
+		</div>
+	</div>
+	<div class="signin-backimg header-title">
+		<form name="logoutform" action="#" th:action="@{/logout}" method="post">
+			<a class="header-link" href="#" onclick="logout()">sign out</a>
+		</form>
+	</div>
+</header>

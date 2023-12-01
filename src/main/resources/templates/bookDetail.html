@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" th:href="@{/css/common.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/side.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/modal.css}" type="text/css">
+	<script type="text/javascript" th:src="@{/js/bookDetail.js}"></script>
+	<script type="text/javascript" th:src="@{/js/modal.js}"></script>
+	<script type="text/javascript" th:src="@{/js/logout.js}"></script>
+<title>書籍詳細</title>
+</head>
+<body>
+	<div class="replace" th:replace="~{/parts/header_part :: header-fragment}"></div>
+	<div class="outer-container">
+		<div class="side-container">
+			<div class="side-inner-container">
+				<h4 class="page-title">書籍詳細</h4>
+				<hr size="2" class="border">
+				<button class="btn delete" type="button" th:value="${book.bookId}" onclick="deleteClick(this.value)">削除</button>
+				<button id="modalOp" class="btn update" type="button" onclick="modalOpen()">在庫管理</button>
+				<form name="checkoutform" action="#" th:action="@{/book/checkout}" method="post">
+					<input type="hidden" name="id" th:value="${book.bookId}">
+					<button class="btn" type="button" onclick="checkout()">貸出手続</button>
+				</form>
+				<hr size="2" class="border">
+			</div>
+		</div>
+		<div class="container">
+			<h4 th:text="${book.title}"></h4>
+		    <table class="modal-table table-striped">
+				<tr><td>著者</td><td th:text="${book.author}"></td></tr>
+				<tr><td>ジャンル</td><td th:text="${book.genre.genre}"></td></tr>
+				<tr><td>出版年</td><td th:text="${book.publicationYear}"></td></tr>
+				<tr><td>isbn</td><td th:text="${book.isbn}"></td></tr>
+				<tr><td>在庫</td><td id="org-stock" th:text="${book.stock}"></td></tr>
+				<tr><td>貸出可否</td><td th:text="${book.status.status}"></td></tr>
+				<tr><td>登録日</td><td th:text="${#dates.format(book.registrationDate, 'yyyy/MM/dd')}"></td></tr>
+		    </table>
+		</div>
+		<div id="easyModal" class="modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1>在庫管理</h1>
+					<span class="modalClose" onclick="modalClose()">×</span>
+				</div>
+				<div class="modal-body">
+					<form name="updateform" action="#" th:action="@{/book/update}" method="post">
+						<input type="hidden" name="id" th:value="${book.bookId}">
+						<input type="hidden" name="status" value="0">
+					    <table class="table-striped">
+							<tr><td>著者</td><td class="modal-td" th:text="${book.author}" th:field="*{author}"></td></tr>
+							<tr><td>ジャンル</td><td class="modal-td" th:text="${book.genre.genre}"></td></tr>
+							<tr><td>出版年</td><td class="modal-td" th:text="${book.publicationYear}"></td></tr>
+							<tr><td>isbn</td><td class="modal-td" th:text="${book.isbn}"></td></tr>
+							<tr><td>在庫</td><td class="modal-td"><input name="stock" th:value="${book.stock}" class="search-input" type="number" required></td></tr>
+							<tr><td>貸出可否</td><td class="modal-td" th:text="${book.status.status}"></td></tr>
+							<tr><td>登録日</td><td class="modal-td" th:text="${#dates.format(book.registrationDate, 'yyyy/MM/dd')}"></td></tr>
+					    </table>
+					    <button id="execute-update" class="btn" type="button" onclick="updateData()">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

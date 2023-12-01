@@ -1,0 +1,114 @@
+/*ベース*/
+.toggle {
+	display: none;
+}
+.Label {		/*タイトル*/
+	width: 30vw;
+	padding: 1em;
+	display: block;
+	color: rgb(0, 0, 0);
+	background:rgb(255, 255, 255);
+	margin: 10px;
+}
+.Label::before{		/*タイトル横の矢印*/
+	content:"";
+	width: 6px;
+	height: 6px;
+	border-top: 2px solid rgb(128, 128, 128);
+	border-right: 2px solid rgb(128, 128, 128);
+	-webkit-transform: rotate(45deg);
+	position: absolute;
+	top:calc( 50% - 3px );
+	right: 20px;
+	transform: rotate(135deg);
+}
+.Label,
+.content {
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	transform: translateZ(0);
+	transition: all 0.3s;
+}
+.content {		/*本文*/
+	height: 0;
+	margin-bottom:10px;
+	padding:0 20px;
+	overflow: hidden;
+}
+.toggle:checked + .Label + .content {	/*開閉時*/
+	height: auto;
+	padding:20px ;
+	transition: all .3s;
+}
+.toggle:checked + .Label::before {
+	transform: rotate(-45deg) !important;
+}
+
+
+.checkout-header{
+	width: 100%;
+	background-color: rgb(46, 46, 103);
+	color: azure;
+	border-radius: 5px;
+	letter-spacing: 0.2em;
+}
+
+.user-select, #duedate{
+	width: 20vw;
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+
+#duedate{
+	margin-top: 10px;
+}
+
+.tooltip { /* 補足説明するテキストのスタイル */
+  position: relative;
+  cursor: pointer;
+  padding: 0 5px;
+  font-size: 0.9em;
+  color: #4682b4;
+}
+ 
+.description_bottom { /* ツールチップのスタイル */
+  width: 30vw; /* 横幅 */
+  position: absolute;
+  top: 80%; /* Y軸の位置 */
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 8px; /* テキストとの距離 */
+  padding: 8px;
+  border-radius: 10px; /* 角の丸み */
+  background-color: #666;
+  font-size: 0.7em;
+  color: #fff;
+  /*text-align: center;*/
+  visibility: hidden; /* ツールチップを非表示に */
+  opacity: 0; /* 不透明度を0％に */
+  z-index: 1;
+  /*transition: 0.5s all; /* マウスオーバー時のアニメーション速度 */
+}
+ 
+.tooltip:hover .description_bottom { /* マウスオーバー時のスタイル */
+  top: 100%; /* Y軸の位置 */
+  visibility: visible; /* ツールチップを表示 */
+  opacity: 1; /* 不透明度を100％に */
+}
+
+.user-table-header {
+ padding: 10px;
+ border-bottom: solid 5px #748ca5;
+ top: 60px;
+ background: #ffffff;
+ border-bottom: 1px solid #999;
+}
+
+.user-search{
+	margin-bottom: 10px;
+}
+
+#usersubmit{
+	background-color: aqua;
+	margin-bottom: 10px;
+}

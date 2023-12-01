@@ -1,0 +1,21 @@
+.user-search{
+	margin-bottom: 10px;
+}
+
+#usersubmit{
+	background-color: aqua;
+	margin-bottom: 10px;
+}
+
+.sub-header{
+	width: 100%;
+	background-color: rgb(46, 46, 103);
+	color: azure;
+	border-radius: 5px;
+	letter-spacing: 0.2em;
+}
+
+
+#duedate{
+	margin-top: 10px;
+}

@@ -1,0 +1,219 @@
+@charset "UTF-8";
+
+body{
+
+}
+
+
+
+.outer-container {
+  width: 100%;
+  display: flex;
+  padding-left: 15vw;
+  margin-left: 35px;
+  padding-top: 60px;
+}
+
+.side-container {
+  width: 15vw;
+  height:100vh;
+  background-color: rgb(255, 255, 255);
+  padding: 15px;
+  margin-right: 20px;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  z-index: 1;
+}
+
+
+.search-checkout{
+	display: flex;
+	margin-top: 10px;
+}
+
+.search-label{
+	display: block;
+	font-size: 12px;
+	padding-right: 10px;
+	width: 50px;
+	vertical-align: middle;
+}
+
+.search-input{
+	display: block;
+	width: 100%;
+	padding: 5px 10px;
+	font-size: 16px;
+	border-radius: 3px;
+	border: 2px solid #ddd;
+	box-sizing: border-box;
+}
+
+.search-input:focus {
+    border: 2px solid #ff9900; 
+    z-index: 10;
+    outline: 0;
+}
+
+.border{
+	margin-top: 10px;
+	margin-bottom: 10px;	
+}
+
+
+.label-text{
+	font-size: 12px;
+	padding-right: 5px;
+	
+}
+
+.chk-lable{
+	display: block;
+	padding-right: 10px;
+}
+
+
+.btn {
+	border-radius: 3px;
+	width: 100%;
+	height: 30px;
+	font-weight: bold;
+	margin-top: 10px;
+	border: none;
+	background-color: darkturquoise;
+	color: #F4F5F7;
+}
+
+.btn:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.delete{
+	background-color: crimson;
+	color: azure;
+}
+
+.update{
+	background-color: gold;
+	color: azure;
+}
+
+
+.link{
+	display: block;
+	margin-top: 10px;
+	text-decoration: none;
+	transition: .3s;
+	color: #666464;
+}
+
+.link:hover {
+  color: darkturquoise;
+}
+
+/* チェックボックスデザイン */
+
+input[type="checkbox"] {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+input[type="checkbox"] {
+    cursor: pointer;
+    padding-left: 30px;/*label手前にチェックボックス用の余白を開ける*/
+    vertical-align: middle;
+    position: relative;
+  }
+ 
+  input[type="checkbox"]::before,
+  input[type="checkbox"]::after {
+    content: "";
+    display: block; 
+    position: absolute;
+  }
+ 
+  input[type="checkbox"]::before {
+    background-color: #fff;
+    border-radius: 0%;
+    border: 1px solid #666464;
+    width: 20px;/*チェックボックスの横幅*/
+    height: 20px;/*チェックボックスの縦幅*/
+    transform: translateY(-50%);
+    top: 50%;
+    left: 5px;
+  }
+ 
+  input[type="checkbox"]::after {
+    border-bottom: 3px solid #666464;/*チェックの太さ*/
+    border-left: 3px solid #666464;/*チェックの太さ*/
+    opacity: 0;/*チェック前は非表示*/
+    height: 6px;/*チェックの高さ*/
+    width: 11px;/*チェックの横幅*/
+    transform: rotate(-45deg);
+    top: -7px;/*チェック時の位置調整*/
+    left: 10px;/*チェック時の位置調整*/
+  }
+ 
+  input[type="checkbox"]:checked::after {
+    opacity: 1;/*チェック後表示*/
+  }
+  
+  
+/* ラジオボタンデザイン */
+.radio-003 {
+    border: none;
+    width: 100%;
+}
+
+.radio-003 label {
+    display: flex;
+    align-items: center;
+    gap: 0 .5em;
+    position: relative;
+    margin-bottom: .4em;
+    padding: .5em .7em;
+    border: 1px solid #2589d0;
+    border-radius: 3px;
+    background-color: #2589d026;
+    cursor: pointer;
+}
+
+.radio-003 label:has(:checked) {
+    background-color: #2589d0;
+    color: #fff;
+}
+
+.radio-003 label::before,
+.radio-003 label:has(:checked)::after {
+    border-radius: 50%;
+    content: '';
+}
+
+.radio-003 label::before {
+    width: 14px;
+    height: 14px;
+    background-color: #fff;
+}
+
+.radio-003 label:has(:checked)::after {
+    position: absolute;
+    top: 50%;
+    left: calc(7px + .7em);
+    transform: translate(-50%, -50%);
+    width: 7px;
+    height: 7px;
+    background-color: #2589d0;
+}
+
+.radio-003 input {
+    display: none;
+}

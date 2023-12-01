@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" th:href="@{/css/common.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/side.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/modal.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/registration.css}" type="text/css">
+	<script type="text/javascript" th:src="@{/js/userRegist.js}"></script>
+	<script type="text/javascript" th:src="@{/js/logout.js}"></script>
+<title>ユーザ登録</title>
+</head>
+<body>
+	<div class="replace" th:replace="~{/parts/header_part :: header-fragment}"></div>
+	<div class="outer-container">
+		<div class="side-container">
+			<div class="side-inner-container">
+				<h4 class="page-title">新規ユーザ登録</h4>
+				<hr size="2" class="border">
+				<button class="btn delete" type="button" onclick="cancelClick()">キャンセル</button>
+				<button class="btn" type="button" onclick="execute()">登録処理実行</button>
+				<hr size="2" class="border">
+			</div>
+		</div>
+		<div class="container">
+			<form action="#" name="registform" th:action="@{/user/registExecute}" th:object="${userEntity}" method="post">
+				<h4 class="sub-header">ユーザ情報</h4>
+			    <div class="content">
+					<table class="modal-table table-striped">
+						<tr><td>姓</td><td><input class="search-input" type="text" th:field="*{lastName}" required></td><td>← 必須</td></tr>
+						<tr><td>名</td><td><input class="search-input" type="text" th:field="*{firstName}" required></td><td>← 必須</td></tr>
+						<tr><td>性別</td><td>
+							<select name="sex" class="search-input" th:field="*{sex}">
+								<option value="M">男性</option>
+								<option value="F">女性</option>
+							</select>
+						</td></tr>
+						<tr><td>生年月日</td><td><input class="search-input" type="date" name="birthday" id="birthday"></td></tr>
+						<tr><td>電話</td><td><input class="search-input" type="tel" th:field="*{tel}" pattern="\d{2,4}-?\d{2,4}-?\d{3,4}"></td><td>← ハイフン省略</td></tr>
+						<tr><td>メール</td><td><input class="search-input" type="email" th:field="*{mail}"></td></tr>
+						<tr><td>住所</td><td><input class="search-input" type="text" required th:field="*{address}"></td></tr>
+				    </table>
+			    </div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

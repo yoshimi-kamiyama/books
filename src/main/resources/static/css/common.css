@@ -1,0 +1,161 @@
+@charset "UTF-8";
+
+* {
+	margin: 0;
+	font-family: inherit;
+}
+
+body {
+	font-family: 'YuGothic','Yu Gothic','Hiragino Kaku Gothic ProN','ヒラギノ角ゴ ProN W3','メイリオ', 'Meiryo','ＭＳ ゴシック',sans-serif;
+}
+
+header{
+	height: 60px;
+	width: 100%;
+	/*
+	padding-top: 10px;
+	padding-left: 10px;
+	*/
+	background-color: #ffffff;
+	position: fixed;
+	top: 0;
+	display: flex;
+	align-items: center;
+}
+
+.logo{
+	width: 200px;
+	padding-left: 15px;
+	padding-right: 30px;
+}
+
+.logo-img{
+	height: 67px;
+	width: 100%;
+}
+
+.header-title{
+	margin-left: auto;
+	margin-right: 20px;
+}
+
+.index-links{
+	display: flex;
+	align-items: center;
+}
+
+.header-link{
+	display: block;
+	text-decoration: none;
+	transition: .3s;
+	color: #666464;
+	margin-left: 20px;
+	margin-right: 20px;
+	padding: 20px 10px 20px 10px;
+}
+
+.header-link:hover {
+  color: #F4F5F7;
+}
+
+.link-backimg{
+	width: 180px;
+}
+
+.link-backimg:hover{
+	background-image: url("../img/back7.png") ;
+	background-size: contain;
+	background-repeat:  no-repeat;
+	/*background-position:center center; */
+}
+
+.signin-backimg{
+	width: 180px;
+}
+
+.signin-backimg:hover{
+	background-image: url("../img/back10.png") ;
+	background-size: contain;
+	background-repeat:  no-repeat;
+	/*background-position:center center; */
+}
+
+.link-text{
+	color: #05adb7;	
+	display: block;
+	margin-top: 10px;
+	text-decoration: none;
+	transition: .3s;
+	font-size: 18px;
+}
+
+.link-text:hover {
+  color: orange;
+}
+
+.container{
+	width: 100%;
+	min-height: 100vh;
+	background-color: #F4F5F7;
+	border-radius: 5px;
+}
+
+table {
+ width:auto	;
+ text-align: left;
+ border-collapse: separate;
+}
+
+.index-th {
+ padding: 10px;
+ border-bottom: solid 5px #748ca5;
+ position: sticky;
+ top: 60px;
+ background: #ffffff;
+ border-bottom: 1px solid #999;
+ background-color: #F4F5F7;
+}
+
+td {
+ padding: 10px;
+ border-bottom: solid 1px #748ca5;
+}
+
+pre{
+	font-size: 16px;
+}
+
+h3 h4{
+	margin-bottom: 10px;
+}
+
+h4{
+	margin-top: 30px;
+	margin-bottom: 30px;
+	padding: 10px;
+}
+
+.page-title{
+	padding: 1rem 2rem;
+	border-top: 6px double #000;
+	border-bottom: 6px double #000;
+	letter-spacing: 0.2em;
+}
+
+.search{
+	display: flex;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-left: 10px;
+	
+}
+
+.serch-query{
+	margin-top: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+}
+
+

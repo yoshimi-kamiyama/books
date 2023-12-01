@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" th:href="@{/css/common.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/side.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/modal.css}" type="text/css">
+	<script type="text/javascript" th:src="@{/js/userDetail.js}"></script>
+	<script type="text/javascript" th:src="@{/js/modal.js}"></script>
+	<script type="text/javascript" th:src="@{/js/logout.js}"></script>
+<title>利用者詳細</title>
+</head>
+<body>
+	<div class="replace" th:replace="~{/parts/header_part :: header-fragment}"></div>
+	<div class="outer-container">
+		<div class="side-container">
+			<div class="side-inner-container">
+				<h4 class="page-title">ユーザ詳細</h4>
+				<hr size="2" class="border">
+				<button class="btn delete" type="button" th:value="${user.userId}" onclick="deleteClick(this.value)">削除</button>
+				<button id="modalOp" class="btn update" type="button" onclick="modalOpen()">変更</button>
+				<hr size="2" class="border">
+			</div>
+		</div>
+		<div class="container">
+		    <table class="modal-table table-striped">
+				<tr><td>姓</td><td th:text="${user.lastName}"></td></tr>
+				<tr><td>名</td><td th:text="${user.firstName}"></td></tr>
+				<tr><td>生年月日</td><td th:text="${#dates.format(user.birth, 'yyyy/MM/dd')}"></td></tr>
+				<tr><td>性別</td><td th:text="${user.sex}"></td></tr>
+				<tr><td>電話</td><td th:text="${user.tel}"></td></tr>
+				<tr><td>メール</td><td th:text="${user.mail}"></td></tr>
+				<tr><td>住所</td><td th:text="${user.address}"></td></tr>
+				<tr><td>登録日</td><td th:text="${#dates.format(user.userRegistered, 'yyyy/MM/dd')}"></td></tr>
+		    </table>
+		</div>
+		<div id="easyModal" class="modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1>登録情報変更</h1>
+					<span class="modalClose" onclick="modalClose()">×</span>
+				</div>
+				<div class="modal-body">
+					<form name="updateform" action="#" th:action="@{/user/update}" th:object="${userUpdateQuery}" method="post">
+						<input type="hidden" name="id" th:field="*{userId}">
+					    <table class="table-striped">
+							<tr><td>姓</td><td class="modal-td"><input name="last-name" class="search-input" type="text" th:field="*{lastName}" required></td></tr>
+							<tr><td>名</td><td class="modal-td"><input name="first-name" class="search-input" type="text" th:field="*{firstName}" required></td></tr>
+							<tr><td>生年月日</td><td th:text="${#dates.format(user.birth, 'yyyy/MM/dd')}"></td></tr>
+							<tr><td>性別</td><td th:text="${user.sex}"></td></tr>
+							<tr><td>tel</td><td class="modal-td"><input name="tel" class="search-input" type="tel" th:field="*{tel}" required></td></tr>
+							<tr><td>mail</td><td class="modal-td"><input name="mail" class="search-input" type="email" th:field="*{mail}" required></td></tr>
+							<tr><td>住所</td><td class="modal-td"><input name="address" class="search-input" type="text" th:field="*{address}" required></td></tr>
+							<tr><td>登録日</td><td th:text="${#dates.format(user.userRegistered, 'yyyy/MM/dd')}"></td></tr>
+					    </table>
+					    <button id="execute-update" class="btn" type="button" onclick="	updateData()">Submit</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

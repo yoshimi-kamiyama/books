@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" th:href="@{/css/common.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/side.css}" type="text/css">
+	<script type="text/javascript" th:src="@{/js/util.js}"></script>
+	<script type="text/javascript" th:src="@{/js/logout.js}"></script>
+	<title>履歴一覧</title>
+</head>
+<body>
+	<!-- <div class="replace" th:replace="/parts/header_part :: header-fragment"></div> -->
+	<div class="replace" th:replace="~{/parts/header_part :: header-fragment}"></div>
+	<div class="outer-container">
+		<div class="side-container">
+			<div class="side-inner-container">
+				<form action="#" th:action="@{/search}" th:object="${searchQuery}" method="get">
+					<h4 class="page-title">履歴一覧</h4>
+					<hr size="2" class="border">
+					<div class="search-checkout">
+						<span class="search-label">From</span>
+						<input id="checkout-from" class="search-input" type="date" th:field="*{from}" required>
+					</div>
+					<div class="search-checkout">
+						<span class="search-label">To</span>
+						<input id="checkout-to" class="search-input" type="date" th:field="*{to}" required>
+					</div>
+					<hr size="2" class="border">
+					<div class="search-checkout">
+						<span class="search-label">書籍名</span>
+						<input class="search-input" type="text" th:field="*{bookName}">
+					</div>
+					<hr size="2" class="border">
+					<div class="search-checkout">
+						<span class="search-label">利用者</span>
+						<input class="search-input" type="text" th:field="*{userName}">
+					</div>
+					<hr size="2" class="border">
+					<input class="btn" type="submit" value="Submit" />
+				</form>
+					<hr size="2" class="border">
+					<div class="search-checkout">
+						<span class="search-label">返却状況</span>
+						<label class="chk-lable"><span class="label-text">返却済</span><input type="checkbox" name="returned" value="T" checked=”checked”></label>
+						<label class="chk-lable"><span class="label-text">未返却</span><input type="checkbox" name="returned" value="F" checked=”checked”></label>
+					</div>
+			</div>
+		</div>
+		<div class="container">
+	    <th:block th:if="${searchedQuery != null}">
+			<div class="serch-query">
+				<h3>検索条件</h3>
+				<div class="search">
+					<pre>期間&#009;&#009;：</pre><span th:text="${searchedQuery.from}"></span> ～ 
+					<span th:text="${searchedQuery.to}"></span>
+				</div>
+				<div class="search">
+					<pre>書籍名&#009;：</pre><p th:text="${searchedQuery.bookName}"></p>
+				</div>
+				<div class="search">
+					<pre>利用者&#009;：</pre><p th:text="${searchedQuery.userName}"></p>
+				</div>
+				<div class="search">
+					<pre>件数&#009;&#009;：</pre><p th:text="${count}"></p>
+				</div>
+			</div>
+		</th:block>
+	    <table class="table table-striped">
+	      <thead>
+	        <tr>
+	          <th class="index-th"></th>
+	          <th class="index-th">貸出日</th>
+	          <th class="index-th">書籍名</th>
+	          <th class="index-th">利用者</th>
+	          <th class="index-th">返却期限</th>
+	          <th class="index-th">返却日</th>
+	          <th class="index-th">返却状況</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	        <tr th:each="history : ${historyList}" th:object="${history}">
+	          <form action="#" th:action="@{/search/id}" method="get">
+		          <input type="hidden" name="id" th:value="*{id}">
+		          <td><button type="submit" class="btn">詳細</button></td>
+	          </form>
+	  		  <td th:text="*{#dates.format(checkoutDate, 'yyyy/MM/dd')}"></td>
+	          <!-- <td th:text="*{books.title}"></td> -->
+	          <td>
+				  <a class="link-text" th:href="@{/book/search/id(id=*{books.bookId})}" th:text="*{books.title}"></a>
+			  </td>
+	          <!-- <td th:text="|*{user.lastName} *{user.firstName}|"></td> -->
+	          <td>
+				  <a class="link-text" th:href="@{/user/search/id(id=*{user.userId})}" th:text="|*{user.lastName} *{user.firstName}|"></a>
+			  </td>
+	          <td th:text="*{#dates.format(dueDate, 'yyyy/MM/dd')}"></td>
+	          <td th:text="*{#dates.format(returnDate, 'yyyy/MM/dd')}"></td>
+	          <td th:text="*{returned}"></td>
+	        </tr>
+	      </tbody>
+	    </table>
+		</div>
+	</div>
+</body>
+</html>

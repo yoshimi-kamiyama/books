@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" th:href="@{/css/common.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/side.css}" type="text/css">
+	<script type="text/javascript" th:src="@{/js/bookUtil.js}"></script>
+	<script type="text/javascript" th:src="@{/js/logout.js}"></script>
+<title>書籍一覧</title>
+</head>
+<body>
+	<div class="replace" th:replace="~{/parts/header_part :: header-fragment}"></div>
+	<!--
+	<header>
+		<div class="logo">
+			<a class="logo-link" href="/"><img class="logo-img" src="../img/EBMS_logo2.png" alt="［写真］"></a>
+		</div>
+		<div class="header-title">sign in</div>
+	</header>
+	-->
+	<div class="outer-container">
+		<div class="side-container">
+			<div class="side-inner-container">
+				<form action="#" th:action="@{/book/search}" th:object="${searchQuery}" method="get">
+					<h4 class="page-title">書籍一覧</h4>
+					<hr size="2" class="border">
+					<div class="search-checkout">
+						<fieldset class="radio-003">
+						    <label>
+						        <input type="radio" name="radio-search" value="0" th:field="*{radioValue}" required>書籍名
+						    </label>
+						    <label>
+						        <input type="radio" name="radio-search" value="1" th:field="*{radioValue}" required>著者
+						    </label>
+						</fieldset>
+					</div>
+					<hr size="2" class="border">
+					<div class="search-checkout">
+						<input class="search-input" type="text" th:field="*{queryText}" required>
+					</div>
+					
+					<input class="btn" type="submit" value="Submit" />
+				</form>
+				<hr size="2" class="border">
+				<div class="search-checkout">
+					<span class="search-label">貸出可否</span>
+					<label class="chk-lable"><span class="label-text">可</span><input type="checkbox" name="is-available" value="T" checked=”checked”></label>
+					<label class="chk-lable"><span class="label-text">不可</span><input type="checkbox" name="is-available" value="F" checked=”checked”></label>
+				</div>
+				<hr size="2" class="border">
+				<a class="link" href="/book/regist">新規書籍登録</a>
+			</div>
+		</div>
+		<div class="container">
+	    <th:block th:if="${searchedQuery != null}">
+			<div class="serch-query">
+				<h3>検索条件</h3>
+				<th:block th:if="${searchedQuery.radioValue == 0}">
+					<div class="search">
+						<pre>書籍名&#009;：</pre><p th:text="${searchedQuery.queryText}"></p>
+					</div>
+				</th:block>
+				<th:block th:if="${searchedQuery.radioValue == 1}">
+					<div class="search">
+						<pre>著者&#009;：</pre><p th:text="${searchedQuery.queryText}"></p>
+					</div>
+				</th:block>
+				<div class="search">
+					<pre>件数&#009;&#009;：</pre><p th:text="${count}"></p>
+				</div>
+			</div>
+		</th:block>
+	    <table class="table table-striped">
+	      <thead>
+	        <tr>
+	          <th class="index-th">書籍名</th>
+	          <th class="index-th">著者</th>
+	          <th class="index-th">ジャンル</th>
+	          <th class="index-th">在庫</th>
+	          <th class="index-th">貸出可否</th>
+	        </tr>
+	      </thead>
+	      <tbody>
+	        <tr th:each="book : ${bookList}" th:object="${book}">
+	          <!-- <td th:text="*{title}"></td> -->
+	          <td>
+				  <a class="link-text" th:href="@{/book/search/id(id=*{bookId})}" th:text="*{title}"></a>
+			  </td>
+	          <td th:text="*{author}"></td>
+	          <!--<td th:text="*{genre.genre}"></td>-->
+	          <td>
+				  <a class="link-text" th:href="@{/book/search/genre(id=*{genre.genreId})}" th:text="*{genre.genre}"></a>
+			  </td>
+	          <td th:text="*{stock}"></td>
+	          <td th:text="*{status.status}"></td>
+	        </tr>
+	      </tbody>
+	    </table>
+		</div>
+	</div>
+</body>
+</html>

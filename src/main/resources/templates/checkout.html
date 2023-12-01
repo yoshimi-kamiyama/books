@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" th:href="@{/css/common.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/side.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/modal.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/checkout.css}" type="text/css">
+	<script type="text/javascript" th:src="@{/js/modalForCheckout.js}"></script>
+	<script type="text/javascript" th:src="@{/js/logout.js}"></script>
+<title>貸出登録</title>
+</head>
+<body>
+	<div class="replace" th:replace="~{/parts/header_part :: header-fragment}"></div>
+	<div class="outer-container">
+		<div class="side-container">
+			<div class="side-inner-container">
+				<h4 class="page-title">貸出手続き</h4>
+				<hr size="2" class="border">
+				<button class="btn delete" type="button" onclick="cancelClick()">キャンセル</button>
+				<button class="btn" type="button" onclick="checkout()">貸出処理実行</button>
+				<hr size="2" class="border">
+			</div>
+		</div>
+		<div class="container">
+			<form action="#" name="checkoutform" th:action="@{/history/checkout}" method="post">
+				<h4 class="checkout-header">貸出書籍情報</h4>
+				<input name="bookId" type="hidden" th:value="${book.bookId}">
+				<input id="block-01" type="checkbox" class="toggle">
+				<label class="Label" for="block-01" th:text="${book.title}"></label>
+			    <div class="content">
+				    <table class="modal-table table-striped">
+						<tr><td>著者</td><td th:text="${book.author}"></td></tr>
+						<tr><td>ジャンル</td><td th:text="${book.genre.genre}"></td></tr>
+						<tr><td>出版年</td><td th:text="${book.publicationYear}"></td></tr>
+						<tr><td>isbn</td><td th:text="${book.isbn}"></td></tr>
+						<tr><td>在庫</td><td id="org-stock" th:text="${book.stock}"></td></tr>
+						<tr><td>貸出可否</td><td th:text="${book.status.status}"></td></tr>
+						<tr><td>登録日</td><td th:text="${#dates.format(book.registrationDate, 'yyyy/MM/dd')}"></td></tr>
+				    </table>
+			    </div>
+			    <h4 class="checkout-header">利用者情報</h4>
+			    <button type="button" class="btn user-select" onclick="modalOpen()">利用者選択</button>
+				<input id="block-02" type="checkbox" class="toggle">
+				<label id="selecteduser" class="Label" for="block-02">未選択</label>
+				<div id="userinfo" class="content">
+					
+				</div>
+				<h4 class="checkout-header">返却日</h4>
+				<input id="duedate" name="due" class="search-input" type="date" required>
+			</form>
+		</div>
+		<div id="easyModal" class="modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1>貸出ユーザ選択</h1>
+					<span class="modalClose" onclick="modalClose()">×</span>
+				</div>
+				<div id="result" class="modal-body">
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

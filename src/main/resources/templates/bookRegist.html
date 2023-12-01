@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" th:href="@{/css/common.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/side.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/modal.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/registration.css}" type="text/css">
+	<script type="text/javascript" th:src="@{/js/bookRegist.js}"></script>
+	<script type="text/javascript" th:src="@{/js/logout.js}"></script>
+<title>書籍登録</title>
+</head>
+<body>
+	<div class="replace" th:replace="~{/parts/header_part :: header-fragment}"></div>
+	<div class="outer-container">
+		<div class="side-container">
+			<div class="side-inner-container">
+				<h4 class="page-title">新規書籍登録</h4>
+				<hr size="2" class="border">
+				<button class="btn delete" type="button" onclick="cancelClick()">キャンセル</button>
+				<button class="btn" type="button" onclick="execute()">登録処理実行</button>
+				<hr size="2" class="border">
+			</div>
+		</div>
+		<div class="container">
+			<form action="#" name="registform" th:action="@{/book/registExecute}"th:object="${bookEntity}" method="post">
+				<h4 class="sub-header">書籍情報</h4>
+			    <div class="content">
+				    <table class="modal-table table-striped">
+						<tr><td>書籍名</td><td><input class="search-input" type="text" th:field="*{title}" required></td><td>← 必須</td></tr>
+						<tr><td>著者</td><td><input class="search-input" type="text" th:field="*{author}"></td></tr>
+						<tr><td>ジャンル</td><td>
+							<select name="genreId" class="search-input">
+								<option th:each="genre : ${genreList}" th:value="${genre.genreId}" th:inline="text">[[${genre.genre}]]</option>
+							</select>
+						</td></tr>
+						<tr><td>出版年</td><td><input class="search-input" type="number" th:field="*{publicationYear}" placeholder="YYYY" min="1900" max="2050"></td></tr>
+						<tr><td>isbn</td><td><input class="search-input" type="text" th:field="*{isbn}"></td></tr>
+						<tr><td>在庫</td><td><input class="search-input" type="number" required th:field="*{stock}"></td><td>← 必須</td></tr>
+				    </table>
+			    </div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

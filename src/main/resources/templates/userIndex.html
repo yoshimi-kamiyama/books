@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" th:href="@{/css/common.css}" type="text/css">
+	<link rel="stylesheet" th:href="@{/css/side.css}" type="text/css">
+	<script type="text/javascript" th:src="@{/js/userUtil.js}"></script>
+	<script type="text/javascript" th:src="@{/js/logout.js}"></script>
+<title>ユーザ一覧</title>
+</head>
+<body>
+	<div class="replace" th:replace="~{/parts/header_part :: header-fragment}"></div>
+	<div class="outer-container">
+		<div class="side-container">
+			<div class="side-inner-container">
+				<form action="#" th:action="@{/user/search}" method="get">
+					<h4 class="page-title">ユーザ一覧</h4>
+					<hr size="2" class="border">
+					<div class="search-checkout">
+						<input class="search-input" type="text" name="name" required>
+					</div>
+					<hr size="2" class="border">
+					<input class="btn" type="submit" value="Submit" />
+				</form>
+					<hr size="2" class="border">
+					<div class="search-checkout">
+						<span class="search-label">表示</span>
+						<label class="chk-lable"><span class="label-text">男性</span><input type="checkbox" name="sex" value="T" checked=”checked”></label>
+						<label class="chk-lable"><span class="label-text">女性</span><input type="checkbox" name="sex" value="F" checked=”checked”></label>
+					</div>
+				<a class="link" href="/user/regist">新規ユーザ登録</a>
+			</div>
+		</div>
+		<div class="container">
+		    <th:block th:if="${searchName != null}">
+				<div class="serch-query">
+					<h3>検索条件</h3>
+					<div class="search">
+						<pre>名前&#009;：</pre><p th:text="${searchName}"></p>
+					</div>
+					<div class="search">
+						<pre>件数&#009;：</pre><p th:text="${userList.size}"></p>
+					</div>
+
+				</div>
+			</th:block>
+		    <table class="table table-striped">
+		      <thead>
+		        <tr>
+		          <th class="index-th">利用者</th>
+		          <th class="index-th">年齢</th>
+		          <th class="index-th">性別</th>
+		          <th class="index-th">電話</th>
+		          <th class="index-th">メール</th>
+		          <th class="index-th">住所</th>
+		        </tr>
+		      </thead>
+		      <tbody>
+		        <tr th:each="user : ${userList}" th:object="${user}">
+		          <!-- <td th:text="|*{lastName} *{firstName}|"></td> -->
+		          <td>
+					  <a class="link-text" th:href="@{/user/search/id(id=*{userId})}" th:text="|*{lastName} *{firstName}|"></a>
+				  </td>
+	<!--
+		          <td>
+					  <a th:href="@{/book/search/genre(id=*{genre.genreId})}" th:text="*{genre.genre}"></a>
+				  </td>
+	-->
+		          <td th:text="*{birth}"></td>
+		          <td th:text="*{sex}"></td>
+		          <td th:text="*{tel}"></td>
+		          <td th:text="*{mail}"></td>
+		          <td th:text="*{address}"></td>
+		        </tr>
+		      </tbody>
+		    </table>
+		</div>
+	</div>
+</body>
+</html>
